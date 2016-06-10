@@ -1,4 +1,4 @@
-function [X,Y] = PlotData(filename)
+function [X,Y] = PlotData(filename)  % X:Deflection Y:Load
 
 fid = fopen(filename);
 try

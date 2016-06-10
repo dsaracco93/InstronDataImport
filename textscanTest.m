@@ -1,3 +1,11 @@
+%Main Script
+%{
+Calls the following files:
+    Cell2Arr.m
+    PlotData.m
+    ClosestNumber.m
+%}
+
 [filename, pathname] = uigetfile({'*.csv'},'Pick a file',...
     'multiselect','on');
 if isempty(filename) 
@@ -26,13 +34,15 @@ x2 = CreateEmpty;
 y1 = CreateEmpty;
 y2 = CreateEmpty;
 
+
 for i = 1:length(filenameCell)
     [X,Y] = PlotData(filenameCell{i});
-    
     %determine stiffness values HERE and create table
+    
+    
     [x1(i),y1(i)] = ClosestNumber(0.5,X,Y);
     [x2(i),y2(i)] = ClosestNumber(2.5,X,Y);
-    
+   
     plot(X,Y,'DisplayName',' a line');
     hold on
     %legend(filenameCell)
@@ -56,5 +66,5 @@ StiffnessT = table(X05',X25',Y1',Y2',StiffnessVal',...
     'RowNames',filenameCell','VariableNames',ColumnTitles) %#ok<NOPTS>
 
 %Write table to csv file
-csvFilename = 'StiffnessData.csv'
+csvFilename = 'StiffnessData.csv';
 writetable(StiffnessT,csvFilename);
